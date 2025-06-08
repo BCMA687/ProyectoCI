@@ -98,6 +98,20 @@ services:
             - "16005:80"
         networks:
             - project-net
+
+
+    jenkins:
+        image: jenkins/jenkins:lts
+        container_name: jenkins_ci
+        ports:
+          - "8085:8080"
+          - "50010:50000"
+        volumes:
+            - jenkins_home:/var/jenkins_home
+        networks:
+          - project-net
+        restart: always
+
 networks:
     project-net:
         driver: bridge
@@ -106,4 +120,6 @@ volumes:
     laravel-app:
         driver: local
     sql-data:
+        driver: local
+    jenkins_home:
         driver: local
